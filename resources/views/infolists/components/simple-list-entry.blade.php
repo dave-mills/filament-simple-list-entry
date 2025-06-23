@@ -63,7 +63,11 @@
                     <div class="-me-1.5 ms-auto flex gap-1.5">
                         @if (is_array($itemActions))
                             @foreach ($itemActions as $action)
-                                {{ $action }}
+                                @if($action instanceof \Filament\Actions\Action)
+                                    {{ $action }}
+                                @else
+                                    {{ $getAction($action) }}
+                                @endif
                             @endforeach
                         @else
                             {{ $itemActions }}
